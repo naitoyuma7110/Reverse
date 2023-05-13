@@ -1,7 +1,13 @@
-export const Cell = (num: number) => {
+import "@/styles/cell.css";
+
+type Props = {
+	cellType: number;
+};
+
+export const Cell = (props: Props) => {
 	return (
 		<>
-			<span>{num}</span>
+			<span className="cell">{props.cellType}</span>
 		</>
 	);
 };
