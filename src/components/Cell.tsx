@@ -1,13 +1,24 @@
-import "@/styles/cell.css";
+import "@/styles/cell.scss";
 
 type Props = {
-	cellType: number;
+	stoneType: number;
 };
 
-export const Cell = (props: Props) => {
+export class Cell {
+	constructor(stoneType: number) {
+		this.stoneType = stoneType;
+	}
+
+	stoneType: number;
+}
+
+export const CellComponent = (props: Props) => {
+	const cell = new Cell(props.stoneType);
 	return (
 		<>
-			<span className="cell">{props.cellType}</span>
+			<div className="cell">
+				<span className={`stone-${cell.stoneType}`}>{cell.stoneType}</span>
+			</div>
 		</>
 	);
 };
