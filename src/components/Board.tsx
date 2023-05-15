@@ -1,6 +1,6 @@
 import { CellComponent } from "@/components/Cell";
 import "@/styles/board.scss";
-import { BoardOptions } from "../types/board";
+import { BoardOptions, Size } from "../types/types";
 
 type Props = {
 	boardOptions: BoardOptions;
@@ -9,15 +9,16 @@ type Props = {
 // クラス定義してボードに関するフィールドとメソッドをまとめる
 export class Board {
 	constructor(boardOptions: BoardOptions) {
+		if (boardOptions.size.x <= 0 || boardOptions.size.x) {
+			throw new Error("Borad size should be more than 0");
+		}
 		this.size = boardOptions.size;
 	}
-	size: {
-		x: number;
-		y: number;
-	};
+
+	size: Size;
 
 	// 初期のオセロボード情報の配列を作成する
-	createBoard() {
+	createInitialBoard() {
 		const board: number[][] = [];
 
 		for (let y = 0; y < this.size.y; y++) {
@@ -41,16 +42,18 @@ export class Board {
 			return 2;
 		return 0;
 	};
+
+	//  x,y座標から現在のboradの石のtypeを返す
 }
 
 export const BoardComponent = (props: Props) => {
 	const board = new Board(props.boardOptions);
 
-	const bordCells = board.createBoard();
+	const initialBoard = board.createInitialBoard();
 	return (
 		<>
 			<div className="board">
-				{bordCells.map((row, y) => {
+				{initialBoard.map((row, y) => {
 					return (
 						<div className="bord-row" key={y}>
 							{y + 1}

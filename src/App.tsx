@@ -1,7 +1,7 @@
 import "./App.css";
 import { BoardComponent } from "./components/Board";
 // import { Size } from "@/types/board";
-import { BoardOptions } from "./types/board";
+import { BoardOptions } from "./types/types";
 
 function App() {
 	// オセロボードの初期設定
